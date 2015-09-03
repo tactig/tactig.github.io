@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://meilan.cf/tags/index.html</loc>
+    <lastmod>2015-09-03T19:37:12.229Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://meilan.cf/2015/09/04/Customize-Kali-Linux-live-USB/</loc>
     <lastmod>2015-09-03T19:29:26.445Z</lastmod>
   </url>
