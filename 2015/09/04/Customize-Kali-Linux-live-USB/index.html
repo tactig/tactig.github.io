@@ -39,15 +39,34 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ealmr's blog">
-<meta property="og:url" content="http://www.ealmr.ml/index.html">
+<meta name="description" content="Environment:
+
+an USB drive /dev/sdax, 2 partitions, /dev/sdx2 mounted to /mnt
+host OS Kali Linux 32 bit
+Kali image: kali-linux.iso
+
+There is no need to install a Kali ISO image onto an USB drive by dd">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Customize Kali Linux live USB">
+<meta property="og:url" content="http://www.ealmr.ml/2015/09/04/Customize-Kali-Linux-live-USB/index.html">
 <meta property="og:site_name" content="ealmr's blog">
-<meta property="og:description">
+<meta property="og:description" content="Environment:
+
+an USB drive /dev/sdax, 2 partitions, /dev/sdx2 mounted to /mnt
+host OS Kali Linux 32 bit
+Kali image: kali-linux.iso
+
+There is no need to install a Kali ISO image onto an USB drive by dd">
+<meta property="og:updated_time" content="2015-09-03T19:17:29.509Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ealmr's blog">
-<meta name="twitter:description">
+<meta name="twitter:title" content="Customize Kali Linux live USB">
+<meta name="twitter:description" content="Environment:
+
+an USB drive /dev/sdax, 2 partitions, /dev/sdx2 mounted to /mnt
+host OS Kali Linux 32 bit
+Kali image: kali-linux.iso
+
+There is no need to install a Kali ISO image onto an USB drive by dd">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -57,7 +76,7 @@
   };
 </script>
 
-  <title> ealmr's blog </title>
+  <title> Customize Kali Linux live USB | ealmr's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -75,9 +94,7 @@
 
 
 
-  <div class="container one-column 
-   page-home 
-">
+  <div class="container one-column page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -153,9 +170,9 @@
     <main id="main" class="main">
       <div class="main-inner">
         <div id="content" class="content"> 
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
@@ -166,9 +183,7 @@
           
           
             
-              <a class="post-title-link" href="/2015/09/04/Customize-Kali-Linux-live-USB/" itemprop="url">
-                Customize Kali Linux live USB
-              </a>
+              Customize Kali Linux live USB
             
           
         </h1>
@@ -196,8 +211,7 @@
       
 
       
-        
-          <span itemprop="articleBody"><p>Environment:</p>
+        <span itemprop="articleBody"><p>Environment:</p>
 <ul>
 <li>an USB drive /dev/sdax, 2 partitions, /dev/sdx2 mounted to /mnt</li>
 <li>host OS Kali Linux 32 bit</li>
@@ -252,7 +266,6 @@ cp custom<span class="class">.squashfs</span> /mnt/live/
 </code></pre><p>for some small files, like .bashrc, .vimrc, you can put them under /mnt/live/*.dir </p>
 <p>A known issue is persistence boot by this way doesn’t work under Kali 1.0.1. I didn’t test it by the <code>dd</code> way. If you can fix this issue please tell me.</p>
 </span>
-        
       
     </div>
 
@@ -260,275 +273,39 @@ cp custom<span class="class">.squashfs</span> /mnt/live/
       
 
       
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/09/04/customize Kali Linux live usb/" rel="next">Customize Kali linux live USB</a>
+            
+          </div>
+        </div>
+      
 
       
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-      
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/09/04/customize Kali Linux live usb/" itemprop="url">
-                Customize Kali linux live USB
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          Posted on
-          <time itemprop="dateCreated" datetime="2015-09-04T03:13:15+08:00" content="2015-09-04">
-            2015-09-04
-          </time>
-        </span>
-
-        
-
-        
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><p>Environment:</p>
-<ul>
-<li>an USB drive /dev/sdax, 2 partitions, /dev/sdx2 mounted to /mnt</li>
-<li>host OS Kali Linux 32 bit</li>
-<li>Kali image: kali-linux.iso</li>
-</ul>
-<p>There is no need to install a Kali ISO image onto an USB drive by <code>dd</code> command. Here introduce a simple way to install. First, extract all content of ISO to /mnt, then we manually install bootloader to USB drive.</p>
-<h2 id="boot_by_extlinux">boot by extlinux</h2><pre><code>extlinux -<span class="tag">i</span> /mnt/
-<span class="tag">dd</span> <span class="keyword">if</span>=/usr/lib/syslinux/mbr/mbr<span class="class">.bin</span> of=/dev/sdx count=<span class="number">1</span> bs=<span class="number">440</span>
-</code></pre><p>First command wirtes extlinux’s 2nd stage boot code to first 512 byte of /dev/sdx2. Normally,BISO transfers control to first <em>440</em> bytes of /dev/sdx(mbr.bin). mbr.bin then boots a bootable partition(which containes 0x55AA). The path of mbr.bin may be vary frm versions and distributions. </p>
-<h2 id="boot_by_GNU_GRUB2">boot by GNU GRUB2</h2><pre><code>extlinux -i <span class="regexp">/mnt/</span>
-grub-install --boot-directory=<span class="regexp">/mnt/</span> <span class="regexp">/dev/</span>sdx
-</code></pre><p>boot command:</p>
-<pre><code><span class="built_in">set</span> root=(hd0,msdos2)
-chainloader +<span class="number">1</span>
-boot
-</code></pre><h2 id="Customization">Customization</h2><p>initram of Kali is based on <a href="http://live.debian.net/" target="_blank" rel="external">Debian Live System Project</a>. After initialization, it searches for files with suffix <code>squashfs ext2 ext3 ext4 xfs jffs2</code> and directories ending with <code>dir</code>, union mount them as root direcory, then chroot into it.</p>
-<pre><code><span class="comment">#initrd.img/bin/boot/9990-overlay.sh:</span>
-<span class="number">69</span>             <span class="keyword">if</span> [ -n <span class="string">"<span class="variable">${addimage_directory}</span>"</span> ] &amp;&amp; [ <span class="operator">-d</span> <span class="string">"<span class="variable">${addimage_directory}</span>"</span> ]
-<span class="number">70</span>             <span class="keyword">then</span>
-<span class="number">71</span>                 <span class="keyword">for</span> FILESYSTEM <span class="keyword">in</span> squashfs ext2 ext3 ext4 xfs jffs2 dir
-<span class="number">72</span>                 <span class="keyword">do</span>
-<span class="number">73</span>                     <span class="keyword">for</span> IMAGE <span class="keyword">in</span> <span class="string">"<span class="variable">${addimage_directory}</span>"</span>/*.<span class="string">"<span class="variable">${FILESYSTEM}</span>"</span>
-<span class="number">74</span>                     <span class="keyword">do</span>
-<span class="number">75</span>                         <span class="keyword">if</span> [ <span class="operator">-e</span> <span class="string">"<span class="variable">${IMAGE}</span>"</span> ]
-<span class="number">76</span>                         <span class="keyword">then</span>
-<span class="number">77</span>                             image_string=<span class="string">"<span class="variable">${image_string}</span> <span class="variable">${IMAGE}</span>"</span>
-<span class="number">78</span>                         <span class="keyword">fi</span>
-<span class="number">79</span>                     <span class="keyword">done</span>
-<span class="number">80</span>                 <span class="keyword">done</span>
-<span class="number">81</span>             <span class="keyword">fi</span>
-</code></pre><p>Union filesystem can mount several path to a single path, the operations to this union path work on the branch path with <code>rw</code> flag. So we can use this feature to customize our own live system.</p>
-<p>Install build tools:</p>
-<pre><code>apt-get <span class="operator"><span class="keyword">install</span> <span class="keyword">union</span>-fuse
-apt-<span class="keyword">get</span> <span class="keyword">install</span> squashfs-tools</span>
-</code></pre><p><code>union-fuse</code> works on application level, that means it doesn’t need kernel driver support. Although a little bit slower compared to aufs, it has good compatibility and works fine in this case.</p>
-<p>then:</p>
-<pre><code>cd /tmp
-mkdir custom
-mkdir union
-mount /mnt/live/filesystem.squashfs /media
-unionfs-fuse -o cow,max_files=<span class="number">32768</span> -o allow_other,use_ino,suid,dev,nonempty /tmp/custom=<span class="type">RW</span>:/media=<span class="type">RO</span> /tmp/union/ 
-cd union
-mount -o <span class="keyword">bind</span> /<span class="keyword">proc</span> <span class="keyword">proc</span>/
-chroot .
-</code></pre><ul>
-<li>option <code>-o cow,max_files=32768 -o allow_other,use_ino,suid,dev,nonempty</code> is necessary, or you are not allowed create files.</li>
-<li>If your host OS is other distributions, you may need set some extra variables when chroot in.</li>
-</ul>
-<p>After this, we can do anything we want in chroot environment. And after operations, all modifications are stored in /tmp/custom. Delete unnecessary files and directories, then packed it as squashfs:</p>
-<pre><code>mksquashfs /tmp/custom custom<span class="class">.squashfs</span> -comp xz 
-cp custom<span class="class">.squashfs</span> /mnt/live/
-</code></pre><p>for some small files, like .bashrc, .vimrc, you can put them under /mnt/live/*.dir </p>
-<p>A known issue is persistence boot by this way doesn’t work under Kali 1.0.1. I didn’t test it by the <code>dd</code> way. If you can fix this issue please tell me.</p>
-</span>
-        
+    <div class="post-spread">
       
     </div>
+  </div>
 
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/09/04/hello-world/" itemprop="url">
-                Hello World
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          Posted on
-          <time itemprop="dateCreated" datetime="2015-09-04T00:17:19+08:00" content="2015-09-04">
-            2015-09-04
-          </time>
-        </span>
-
-        
-
-        
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/09/03/test-new/" itemprop="url">
-                test new
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          Posted on
-          <time itemprop="dateCreated" datetime="2015-09-03T21:55:59+08:00" content="2015-09-03">
-            2015-09-03
-          </time>
-        </span>
-
-        
-
-        
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><pre><code><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span>
-
-<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>
-</span>{
-    <span class="keyword">return</span> <span class="number">0</span>;
-}
-</code></pre></span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-  </section>
-
-  
  </div>
 
         
 
+        
+          <div class="comments" id="comments">
+            
+          </div>
         
       </div>
 
@@ -545,6 +322,15 @@ cp custom<span class="class">.squashfs</span> /mnt/live/
   <aside id="sidebar" class="sidebar">
     <div class="sidebar-inner">
 
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table Of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
       
 
       <section class="site-overview">
@@ -599,6 +385,17 @@ cp custom<span class="class">.squashfs</span> /mnt/live/
 
       </section>
 
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#boot_by_extlinux"><span class="nav-number">1.</span> <span class="nav-text">boot by extlinux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#boot_by_GNU_GRUB2"><span class="nav-number">2.</span> <span class="nav-text">boot by GNU GRUB2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Customization"><span class="nav-number">3.</span> <span class="nav-text">Customization</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
       
 
     </div>
@@ -668,6 +465,165 @@ cp custom<span class="class">.squashfs</span> /mnt/live/
   <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
   
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
 
   <script type="text/javascript">
     $(document).ready(function () {
