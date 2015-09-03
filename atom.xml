@@ -3,9 +3,9 @@
   <title><![CDATA[ealmr's blog]]></title>
   
   <link href="/atom.xml" rel="self"/>
-  <link href="http://www.ealmr.ml/"/>
-  <updated>2015-09-03T19:17:29.509Z</updated>
-  <id>http://www.ealmr.ml/</id>
+  <link href="http://meilan.cf/"/>
+  <updated>2015-09-03T19:29:26.445Z</updated>
+  <id>http://meilan.cf/</id>
   
   <author>
     <name><![CDATA[ealmr]]></name>
@@ -16,10 +16,10 @@
   
   <entry>
     <title><![CDATA[Customize Kali Linux live USB]]></title>
-    <link href="http://www.ealmr.ml/2015/09/04/Customize-Kali-Linux-live-USB/"/>
-    <id>http://www.ealmr.ml/2015/09/04/Customize-Kali-Linux-live-USB/</id>
+    <link href="http://meilan.cf/2015/09/04/Customize-Kali-Linux-live-USB/"/>
+    <id>http://meilan.cf/2015/09/04/Customize-Kali-Linux-live-USB/</id>
     <published>2015-09-03T19:16:46.000Z</published>
-    <updated>2015-09-03T19:17:29.509Z</updated>
+    <updated>2015-09-03T19:29:26.445Z</updated>
     <content type="html"><![CDATA[<p>Environment:</p>
 <ul>
 <li>an USB drive /dev/sdax, 2 partitions, /dev/sdx2 mounted to /mnt</li>
@@ -73,7 +73,7 @@ chroot .
 <pre><code>mksquashfs /tmp/custom custom<span class="class">.squashfs</span> -comp xz 
 cp custom<span class="class">.squashfs</span> /mnt/live/
 </code></pre><p>for some small files, like .bashrc, .vimrc, you can put them under /mnt/live/*.dir </p>
-<p>A known issue is persistence boot by this way doesn’t work under Kali 1.0.1. I didn’t test it by the <code>dd</code> way. If you can fix this issue please tell me.</p>
+<p>A known issue is persistence boot by this way doesn’t work under Kali 1.0.1. I didn’t test it by the <code>dd</code> way. </p>
 ]]></content>
     <summary type="html">
     <![CDATA[<p>Environment:</p>
@@ -83,83 +83,14 @@ cp custom<span class="class">.squashfs</span> /mnt/live/
 <li>Kal]]>
     </summary>
     
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Customize Kali linux live USB]]></title>
-    <link href="http://www.ealmr.ml/2015/09/04/customize%20Kali%20Linux%20live%20usb/"/>
-    <id>http://www.ealmr.ml/2015/09/04/customize Kali Linux live usb/</id>
-    <published>2015-09-03T19:13:15.805Z</published>
-    <updated>2015-09-03T19:13:15.737Z</updated>
-    <content type="html"><![CDATA[<p>Environment:</p>
-<ul>
-<li>an USB drive /dev/sdax, 2 partitions, /dev/sdx2 mounted to /mnt</li>
-<li>host OS Kali Linux 32 bit</li>
-<li>Kali image: kali-linux.iso</li>
-</ul>
-<p>There is no need to install a Kali ISO image onto an USB drive by <code>dd</code> command. Here introduce a simple way to install. First, extract all content of ISO to /mnt, then we manually install bootloader to USB drive.</p>
-<h2 id="boot_by_extlinux">boot by extlinux</h2><pre><code>extlinux -<span class="tag">i</span> /mnt/
-<span class="tag">dd</span> <span class="keyword">if</span>=/usr/lib/syslinux/mbr/mbr<span class="class">.bin</span> of=/dev/sdx count=<span class="number">1</span> bs=<span class="number">440</span>
-</code></pre><p>First command wirtes extlinux’s 2nd stage boot code to first 512 byte of /dev/sdx2. Normally,BISO transfers control to first <em>440</em> bytes of /dev/sdx(mbr.bin). mbr.bin then boots a bootable partition(which containes 0x55AA). The path of mbr.bin may be vary frm versions and distributions. </p>
-<h2 id="boot_by_GNU_GRUB2">boot by GNU GRUB2</h2><pre><code>extlinux -i <span class="regexp">/mnt/</span>
-grub-install --boot-directory=<span class="regexp">/mnt/</span> <span class="regexp">/dev/</span>sdx
-</code></pre><p>boot command:</p>
-<pre><code><span class="built_in">set</span> root=(hd0,msdos2)
-chainloader +<span class="number">1</span>
-boot
-</code></pre><h2 id="Customization">Customization</h2><p>initram of Kali is based on <a href="http://live.debian.net/" target="_blank" rel="external">Debian Live System Project</a>. After initialization, it searches for files with suffix <code>squashfs ext2 ext3 ext4 xfs jffs2</code> and directories ending with <code>dir</code>, union mount them as root direcory, then chroot into it.</p>
-<pre><code><span class="comment">#initrd.img/bin/boot/9990-overlay.sh:</span>
-<span class="number">69</span>             <span class="keyword">if</span> [ -n <span class="string">"<span class="variable">${addimage_directory}</span>"</span> ] &amp;&amp; [ <span class="operator">-d</span> <span class="string">"<span class="variable">${addimage_directory}</span>"</span> ]
-<span class="number">70</span>             <span class="keyword">then</span>
-<span class="number">71</span>                 <span class="keyword">for</span> FILESYSTEM <span class="keyword">in</span> squashfs ext2 ext3 ext4 xfs jffs2 dir
-<span class="number">72</span>                 <span class="keyword">do</span>
-<span class="number">73</span>                     <span class="keyword">for</span> IMAGE <span class="keyword">in</span> <span class="string">"<span class="variable">${addimage_directory}</span>"</span>/*.<span class="string">"<span class="variable">${FILESYSTEM}</span>"</span>
-<span class="number">74</span>                     <span class="keyword">do</span>
-<span class="number">75</span>                         <span class="keyword">if</span> [ <span class="operator">-e</span> <span class="string">"<span class="variable">${IMAGE}</span>"</span> ]
-<span class="number">76</span>                         <span class="keyword">then</span>
-<span class="number">77</span>                             image_string=<span class="string">"<span class="variable">${image_string}</span> <span class="variable">${IMAGE}</span>"</span>
-<span class="number">78</span>                         <span class="keyword">fi</span>
-<span class="number">79</span>                     <span class="keyword">done</span>
-<span class="number">80</span>                 <span class="keyword">done</span>
-<span class="number">81</span>             <span class="keyword">fi</span>
-</code></pre><p>Union filesystem can mount several path to a single path, the operations to this union path work on the branch path with <code>rw</code> flag. So we can use this feature to customize our own live system.</p>
-<p>Install build tools:</p>
-<pre><code>apt-get <span class="operator"><span class="keyword">install</span> <span class="keyword">union</span>-fuse
-apt-<span class="keyword">get</span> <span class="keyword">install</span> squashfs-tools</span>
-</code></pre><p><code>union-fuse</code> works on application level, that means it doesn’t need kernel driver support. Although a little bit slower compared to aufs, it has good compatibility and works fine in this case.</p>
-<p>then:</p>
-<pre><code>cd /tmp
-mkdir custom
-mkdir union
-mount /mnt/live/filesystem.squashfs /media
-unionfs-fuse -o cow,max_files=<span class="number">32768</span> -o allow_other,use_ino,suid,dev,nonempty /tmp/custom=<span class="type">RW</span>:/media=<span class="type">RO</span> /tmp/union/ 
-cd union
-mount -o <span class="keyword">bind</span> /<span class="keyword">proc</span> <span class="keyword">proc</span>/
-chroot .
-</code></pre><ul>
-<li>option <code>-o cow,max_files=32768 -o allow_other,use_ino,suid,dev,nonempty</code> is necessary, or you are not allowed create files.</li>
-<li>If your host OS is other distributions, you may need set some extra variables when chroot in.</li>
-</ul>
-<p>After this, we can do anything we want in chroot environment. And after operations, all modifications are stored in /tmp/custom. Delete unnecessary files and directories, then packed it as squashfs:</p>
-<pre><code>mksquashfs /tmp/custom custom<span class="class">.squashfs</span> -comp xz 
-cp custom<span class="class">.squashfs</span> /mnt/live/
-</code></pre><p>for some small files, like .bashrc, .vimrc, you can put them under /mnt/live/*.dir </p>
-<p>A known issue is persistence boot by this way doesn’t work under Kali 1.0.1. I didn’t test it by the <code>dd</code> way. If you can fix this issue please tell me.</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>Environment:</p>
-<ul>
-<li>an USB drive /dev/sdax, 2 partitions, /dev/sdx2 mounted to /mnt</li>
-<li>host OS Kali Linux 32 bit</li>
-<li>Kal]]>
-    </summary>
+      <category term="linux" scheme="http://meilan.cf/tags/linux/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Hello World]]></title>
-    <link href="http://www.ealmr.ml/2015/09/04/hello-world/"/>
-    <id>http://www.ealmr.ml/2015/09/04/hello-world/</id>
+    <link href="http://meilan.cf/2015/09/04/hello-world/"/>
+    <id>http://meilan.cf/2015/09/04/hello-world/</id>
     <published>2015-09-03T16:17:19.941Z</published>
     <updated>2015-09-03T16:17:19.941Z</updated>
     <content type="html"><![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
@@ -180,8 +111,8 @@ cp custom<span class="class">.squashfs</span> /mnt/live/
   
   <entry>
     <title><![CDATA[test new]]></title>
-    <link href="http://www.ealmr.ml/2015/09/03/test-new/"/>
-    <id>http://www.ealmr.ml/2015/09/03/test-new/</id>
+    <link href="http://meilan.cf/2015/09/03/test-new/"/>
+    <id>http://meilan.cf/2015/09/03/test-new/</id>
     <published>2015-09-03T13:55:59.000Z</published>
     <updated>2015-09-03T16:17:19.941Z</updated>
     <content type="html"><![CDATA[<pre><code><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span>
